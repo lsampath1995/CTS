@@ -1,0 +1,71 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2821
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!DOCTYPE html>\
+<html lang="en">\
+<head>\
+    <meta charset="UTF-8">\
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">\
+    <title>Cloudix Tech Solutions</title>\
+    <style>\
+        body \{\
+            font-family: Arial, sans-serif;\
+            text-align: center;\
+            margin-top: 50px;\
+            background-color: #f0f0f0;\
+        \}\
+        h1 \{\
+            color: #333;\
+        \}\
+        button \{\
+            padding: 10px 20px;\
+            font-size: 16px;\
+            background-color: #007bff;\
+            color: white;\
+            border: none;\
+            cursor: pointer;\
+        \}\
+        button:hover \{\
+            background-color: #0056b3;\
+        \}\
+        #userData \{\
+            margin-top: 20px;\
+            font-size: 18px;\
+        \}\
+    </style>\
+</head>\
+<body>\
+    <h1>Welcome to Cloudix Tech Solutions</h1>\
+    <p>This is a migrated web server running on AWS EC2.</p>\
+    <button onclick="fetchUsers()">Show Users from Database</button>\
+    <div id="userData"></div>\
+\
+    <script>\
+        function fetchUsers() \{\
+            fetch('get_users.php')\
+                .then(response => response.json())\
+                .then(data => \{\
+                    let userDataDiv = document.getElementById('userData');\
+                    if (data.length > 0) \{\
+                        let output = '<h3>Users:</h3><ul>';\
+                        data.forEach(user => \{\
+                            output += `<li>$\{user.name\} ($\{user.email\})</li>`;\
+                        \});\
+                        output += '</ul>';\
+                        userDataDiv.innerHTML = output;\
+                    \} else \{\
+                        userDataDiv.innerHTML = '<p>No users found.</p>';\
+                    \}\
+                \})\
+                .catch(error => \{\
+                    console.error('Error:', error);\
+                    document.getElementById('userData').innerHTML = '<p>Error fetching users.</p>';\
+                \});\
+        \}\
+    </script>\
+</body>\
+</html>}
